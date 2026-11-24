@@ -11,6 +11,11 @@
       "name": "vector-range",
       "source": "./vector-range",
       "description": "A vector-arcade look: a slow drift across a green wireframe plain of monuments, beacons and far mountains"
+    },
+    {
+      "name": "eel-rain",
+      "source": "./eel-rain",
+      "description": "The eel logo, softened, at the centre of slow falling green code"
     }
   ]
 }
