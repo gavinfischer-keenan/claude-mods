@@ -16,6 +16,11 @@
       "name": "eel-rain",
       "source": "./eel-rain",
       "description": "The eel logo, softened, at the centre of slow falling green code"
+    },
+    {
+      "name": "eel-tank",
+      "source": "./eel-tank",
+      "description": "An electric eel swims slowly around a tank of dense falling green code, now and then throwing red sparks"
     }
   ]
 }

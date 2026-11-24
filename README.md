@@ -7,6 +7,7 @@ Looks and mods for Claude Code. Each look draws in the Claude desktop and mobile
 | [`green-rain`](#green-rain) | Slow columns of falling green characters on black |
 | [`vector-range`](#vector-range) | A slow drift across a green wireframe plain |
 | [`eel-rain`](#eel-rain) | The eel logo, softened, with the green rain falling around it |
+| [`eel-tank`](#eel-tank) | An electric eel swimming slowly around a tank of dense green rain |
 
 ## Install
 
@@ -26,6 +27,10 @@ At the prompt of a terminal session:
 /plugin install eel-rain --marketplace gavinfischer-keenan/claude-mods
 ```
 
+```
+/plugin install eel-tank --marketplace gavinfischer-keenan/claude-mods
+```
+
 From a shell:
 
 ```bash
@@ -40,11 +45,15 @@ claude plugin install vector-range --marketplace gavinfischer-keenan/claude-mods
 claude plugin install eel-rain --marketplace gavinfischer-keenan/claude-mods
 ```
 
+```bash
+claude plugin install eel-tank --marketplace gavinfischer-keenan/claude-mods
+```
+
 Answer `y` to add the marketplace, then pick a scope. The user scope makes it the look of every session started afterwards.
 
 ### One look at a time
 
-A session has one theme, so with more than one look installed the one that starts last wins. Keep one enabled as the default, or switch inside a session with each look's own command: `/green-rain on`, `/vector-range on` or `/eel-rain on`.
+A session has one theme, so with more than one look installed the one that starts last wins. Keep one enabled as the default, or switch inside a session with each look's own command: `/green-rain on`, `/vector-range on`, `/eel-rain on` or `/eel-tank on`.
 
 ## green-rain
 
@@ -82,3 +91,16 @@ The rain, the colours and the message styling are `green-rain`'s. The logo is si
 ### Tuning
 
 The scene is drawn by `eel-rain/hooks/register.tsx`. `BADGE` near the top sets where the logo sits and how large it is. In `buildScene`, the logo's strength is the `opacity` on its group and the two values in the `glow` keyframes, and the disc's `fill-opacity` decides how much rain shows behind the logo. The rain's numbers are the same as `green-rain`'s. The logo's shapes are in `eel-rain/hooks/logo.ts`, one path for each colour layer, back to front.
+
+## eel-tank
+
+An electric eel, redrawn after the logo's, swims one slow lap of the screen through rain twice as dense as `green-rain`'s. It is a head and sixteen body pieces that all follow the same wavy track, each a little behind the last, so the body bends wherever the track does. On the turns it rolls over, so its back stays up on the way back. Now and then one of three points along its body throws a burst of red sparks, with a brief crackle across the body.
+
+The colours and the message styling are `green-rain`'s. On a phone only the middle of the tank shows, so the eel passes through. The scene holds still, eel posed along the top, for anyone who has asked for reduced motion.
+
+- `/eel-tank off` returns the app's own look for that session.
+- `/eel-tank on` brings it back.
+
+### Tuning
+
+The eel is drawn by `eel-tank/hooks/eel.ts`, and its constants are at the top: `LAP` is one circuit in seconds, `SIZE` is how large the eel is shown, `SWING` and `WAVE` shape the side-to-side wave, and `TANK` is the circuit's centre and reach. The `bursts` list in `buildEel` holds each spark point: where on the body it is, how many seconds between bursts, and the directions its bolts fly. The rain is drawn by `eel-tank/hooks/rain.ts`: the column spacing (`x += 20`) and the share of columns with a second stream (`0.95`) set its density. Its glyph set has no slash, because a slash beside a star in the markup reads as the start of a comment and the app refuses the scene.
