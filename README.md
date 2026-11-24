@@ -6,6 +6,7 @@ Looks and mods for Claude Code. Each look draws in the Claude desktop and mobile
 | --- | --- |
 | [`green-rain`](#green-rain) | Slow columns of falling green characters on black |
 | [`vector-range`](#vector-range) | A slow drift across a green wireframe plain |
+| [`eel-rain`](#eel-rain) | The eel logo, softened, with the green rain falling around it |
 
 ## Install
 
@@ -21,6 +22,10 @@ At the prompt of a terminal session:
 /plugin install vector-range --marketplace gavinfischer-keenan/claude-mods
 ```
 
+```
+/plugin install eel-rain --marketplace gavinfischer-keenan/claude-mods
+```
+
 From a shell:
 
 ```bash
@@ -31,11 +36,15 @@ claude plugin install green-rain --marketplace gavinfischer-keenan/claude-mods
 claude plugin install vector-range --marketplace gavinfischer-keenan/claude-mods
 ```
 
+```bash
+claude plugin install eel-rain --marketplace gavinfischer-keenan/claude-mods
+```
+
 Answer `y` to add the marketplace, then pick a scope. The user scope makes it the look of every session started afterwards.
 
 ### One look at a time
 
-A session has one theme, so with both looks installed the one that starts last wins. Keep one enabled as the default, or switch inside a session with each look's own command: `/green-rain on` or `/vector-range on`.
+A session has one theme, so with more than one look installed the one that starts last wins. Keep one enabled as the default, or switch inside a session with each look's own command: `/green-rain on`, `/vector-range on` or `/eel-rain on`.
 
 ## green-rain
 
@@ -60,3 +69,16 @@ The scene is darker through the middle of the window, where the words sit, and h
 ### Tuning
 
 The scene is drawn by `vector-range/hooks/register.tsx`. The constants at the top set the pace and the depth: `DRIFT` is how fast everything passes, `NEAREST` is how close the largest monuments come, and `HORIZON` is where the plain meets the sky. In `buildScene`, the loop count (`index < 22`) is how many monuments stand on the plain, and the exponent beside it (`2.7`) pushes more of them into the distance as it grows. The `glass` setting decides how much of the scene shows through the app's panels.
+
+## eel-rain
+
+The eel logo at the centre of the green rain. The logo is traced from the artwork into flat vector layers: its blues are kept, and its black outlines and rings are drawn in a dark slate blue so they still read on a dark ground. It is softened to about 60% strength and brightens and dims very slowly. A dark disc behind it holds the rain back, so the code falls around the logo and not through it.
+
+The rain, the colours and the message styling are `green-rain`'s. The logo is sized to stay whole on a phone and on a very wide window, and the scene holds still for anyone who has asked for reduced motion.
+
+- `/eel-rain off` returns the app's own look for that session.
+- `/eel-rain on` brings it back.
+
+### Tuning
+
+The scene is drawn by `eel-rain/hooks/register.tsx`. `BADGE` near the top sets where the logo sits and how large it is. In `buildScene`, the logo's strength is the `opacity` on its group and the two values in the `glow` keyframes, and the disc's `fill-opacity` decides how much rain shows behind the logo. The rain's numbers are the same as `green-rain`'s. The logo's shapes are in `eel-rain/hooks/logo.ts`, one path for each colour layer, back to front.
