@@ -6,6 +6,11 @@
       "name": "green-rain",
       "source": "./green-rain",
       "description": "A dark phosphor-green look with slow falling code behind the conversation"
+    },
+    {
+      "name": "vector-range",
+      "source": "./vector-range",
+      "description": "A vector-arcade look: a slow drift across a green wireframe plain of monuments, beacons and far mountains"
     }
   ]
 }
